@@ -1,0 +1,12 @@
+{
+  "name": "todo-app-colab",
+  "version": "0.1.0",
+  "private": false,
+  "description": "A small todo app used to test collaborative sessions",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test",
+    "start": "node src/cli.js"
+  },
+  "license": "MIT"
+}
