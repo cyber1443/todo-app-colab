@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Board</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <h1>Board</h1>
+      <form id="add-card" class="add-card">
+        <select id="add-column" aria-label="Column"></select>
+        <input id="add-title" type="text" placeholder="New card" aria-label="Card title" required />
+        <button type="submit">Add</button>
+      </form>
+    </header>
+
+    <main id="board" class="board" aria-live="polite"></main>
+    <p id="error" class="error" role="status" hidden></p>
+
+    <!-- Symlinked to src/lib/board/web-contract.js: the server only serves this
+         directory, and the contract must stay a single file. -->
+    <script src="/web-contract.js"></script>
+    <script src="/dnd.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+../../lib/board/web-contract.js
