@@ -1,5 +1,8 @@
 const test = require('node:test')
 const assert = require('node:assert')
+const fs = require('node:fs')
+const path = require('node:path')
+const vm = require('node:vm')
 
 const { dropIndexFor, movePayloadFor, applyMove } = require('./public/dnd.js')
 
@@ -137,6 +140,57 @@ test('applyMove ignores an unknown card or column', () => {
   )
   const untouched = applyMove(snapshot(), { cardId: 'card-1', toColumnId: 'nope', toIndex: 0 })
   assert.deepStrictEqual(idsIn(untouched, 'todo'), ['card-1', 'card-2'])
+})
+
+/**
+ * The scripts index.html loads, in the order it loads them. Requiring these
+ * files gives each one its own module scope, which is exactly what the browser
+ * does not do, so the collisions that matter can only be seen by running them
+ * the way the page runs them: one shared global scope, in order.
+ */
+function pageScripts() {
+  const publicDir = path.join(__dirname, 'public')
+  const html = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf8')
+  const sources = [...html.matchAll(/<script\s+src="([^"]+)"/g)].map((match) => match[1])
+  assert.ok(sources.length >= 2, 'index.html should load at least the contract and the drag layer')
+  return sources.map((src) => ({
+    src,
+    code: fs.readFileSync(path.join(publicDir, src.replace(/^\//, '')), 'utf8'),
+  }))
+}
+
+test('every script the page loads shares one scope without colliding', () => {
+  const context = vm.createContext({})
+  vm.runInContext('globalThis.module = undefined', context)
+
+  for (const { src, code } of pageScripts()) {
+    try {
+      vm.runInContext(code, context, { filename: src })
+    } catch (error) {
+      // A collision shows up while the script is being instantiated, before a
+      // line of it runs. Anything else is this harness having no DOM, which is
+      // not what this test is about. The error is built inside the vm context,
+      // so it is not an instanceof this realm's SyntaxError; go by name.
+      assert.notStrictEqual(
+        error.name,
+        'SyntaxError',
+        `${src} cannot be loaded alongside the scripts before it: ${error.message}`,
+      )
+    }
+  }
+})
+
+test('the page gets both globals its app.js destructures on load', () => {
+  const context = vm.createContext({})
+  vm.runInContext('globalThis.module = undefined', context)
+  for (const { src, code } of pageScripts()) {
+    if (src.endsWith('/app.js')) continue // needs a DOM; the two libraries do not
+    vm.runInContext(code, context, { filename: src })
+  }
+
+  assert.strictEqual(vm.runInContext('typeof globalThis.boardWebContract', context), 'object')
+  assert.strictEqual(vm.runInContext('typeof globalThis.boardDnd', context), 'object')
+  assert.strictEqual(vm.runInContext('typeof globalThis.boardDnd.movePayloadFor', context), 'function')
 })
 
 test('the drop index and the store agree on where a card lands', async () => {
