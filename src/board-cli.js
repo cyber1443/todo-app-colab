@@ -1,0 +1,10 @@
+const { createBoard } = require('./lib/board.js')
+const { renderBoard } = require('./components/board/render.js')
+
+const board = createBoard()
+const plan = board.addCard('plan the board split')
+board.addCard('build the store')
+board.addCard('render the board')
+board.moveCard(plan.id, 'done')
+board.moveCard(2, 'doing')
+console.log(renderBoard(board.snapshot()))
