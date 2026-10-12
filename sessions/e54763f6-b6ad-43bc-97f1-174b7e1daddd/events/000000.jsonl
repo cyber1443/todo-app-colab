@@ -106,3 +106,4 @@
 {"seq":105,"ts":1791819183264,"actorId":"6517ac29-3bf0-4e02-8ade-d34ac83ea082","body":{"type":"participant.connection","participantId":"6517ac29-3bf0-4e02-8ade-d34ac83ea082","connected":true}}
 {"seq":106,"ts":1791819292497,"actorId":"e40868d2-549f-4bb2-bc1d-727accf14558","body":{"type":"terminal.helm","terminalId":"3ac3c1eb-0c31-4935-9995-4a196d3e29da","ticketId":"1a2b7897-cc51-4ae4-beed-3620a230aafd","driver":"e40868d2-549f-4bb2-bc1d-727accf14558"}}
 {"seq":107,"ts":1791819374962,"actorId":"6517ac29-3bf0-4e02-8ade-d34ac83ea082","body":{"type":"participant.connection","participantId":"6517ac29-3bf0-4e02-8ade-d34ac83ea082","connected":true}}
+{"seq":108,"ts":1791819395186,"actorId":"6517ac29-3bf0-4e02-8ade-d34ac83ea082","body":{"type":"terminal.helm","terminalId":"3ac3c1eb-0c31-4935-9995-4a196d3e29da","ticketId":"1a2b7897-cc51-4ae4-beed-3620a230aafd","driver":null}}
