@@ -112,3 +112,6 @@
 {"seq":111,"ts":1791819427113,"actorId":"6517ac29-3bf0-4e02-8ade-d34ac83ea082","body":{"type":"terminal.helm","terminalId":"cc06d197-4ce5-4541-bb30-3952d90386bd","ticketId":"1a2b7897-cc51-4ae4-beed-3620a230aafd","driver":null}}
 {"seq":112,"ts":1791819461598,"actorId":null,"body":{"type":"terminal.closed","terminalId":"cc06d197-4ce5-4541-bb30-3952d90386bd","ticketId":"1a2b7897-cc51-4ae4-beed-3620a230aafd","exitCode":129}}
 {"seq":113,"ts":1791819475675,"actorId":"6517ac29-3bf0-4e02-8ade-d34ac83ea082","body":{"type":"usage.recorded","participantId":"6517ac29-3bf0-4e02-8ade-d34ac83ea082","ticketId":null,"inputTokens":4,"outputTokens":160,"cacheReadTokens":53045,"cacheCreationTokens":29459,"turns":2}}
+{"seq":114,"ts":1791824157151,"actorId":"6517ac29-3bf0-4e02-8ade-d34ac83ea082","body":{"type":"participant.connection","participantId":"6517ac29-3bf0-4e02-8ade-d34ac83ea082","connected":true}}
+{"seq":115,"ts":1791824157166,"actorId":"6517ac29-3bf0-4e02-8ade-d34ac83ea082","body":{"type":"participant.connection","participantId":"6517ac29-3bf0-4e02-8ade-d34ac83ea082","connected":true}}
+{"seq":116,"ts":1791824157170,"actorId":"6517ac29-3bf0-4e02-8ade-d34ac83ea082","body":{"type":"participant.connection","participantId":"6517ac29-3bf0-4e02-8ade-d34ac83ea082","connected":true}}
